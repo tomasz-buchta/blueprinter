@@ -3,23 +3,10 @@ class Blueprinter::Field
   attr_reader :method, :name, :extractor, :options, :blueprint
   def initialize(method, name, extractor, blueprint, options = {})
     @method = method
-    @name = format_name(name)
+    @name = name
     @extractor = extractor
     @blueprint = blueprint
     @options = options
-  end
-
-  def format_name(name)
-    config = Blueprinter.configuration
-
-    return name unless config.camelize_keys
-
-    camelize name
-  end
-
-  def camelize(name)
-    string = name.to_s.sub(/^(?:(?=\b|[A-Z_])|\w)/) { $&.downcase }
-    string.gsub(/(?:_|(\/))([a-z\d]*)/) { "#{$1}#{$2.capitalize}" }.gsub('/', '::')
   end
 
   def extract(object, local_options)

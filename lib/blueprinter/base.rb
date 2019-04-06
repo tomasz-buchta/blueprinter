@@ -7,6 +7,8 @@ require_relative 'extractors/block_extractor'
 require_relative 'extractors/hash_extractor'
 require_relative 'extractors/public_send_extractor'
 require_relative 'formatters/date_time_formatter'
+require_relative 'formatters/name_formatter'
+require_relative 'formatters/camelize_formatter'
 require_relative 'field'
 require_relative 'helpers/base_helpers'
 require_relative 'view'
@@ -116,7 +118,7 @@ module Blueprinter
     def self.field(method, options = {}, &block)
       current_view << Field.new(
         method,
-        options.fetch(:name) { method },
+        options.fetch(:name) { NameFormatter.new.format(method) },
         options.fetch(:extractor) { AutoExtractor.new },
         self,
         options.merge(block: block),
