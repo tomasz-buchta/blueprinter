@@ -27,16 +27,6 @@ shared_examples 'Base::render' do
       before { Blueprinter.configure { |config| config.camelize_keys = true } }
       after { reset_blueprinter_config! }
 
-      let(:blueprint) do
-        Class.new(Blueprinter::Base) do
-          field :id # number
-          field :first_name # string
-          field :active # boolean
-          field :birthday # date
-          field :deleted_at # null
-        end
-      end
-
       let(:result) { '{"active":false,"birthday":"1994-03-04","deletedAt":null,"firstName":"Meg","id":' + obj_id + '}' }
       it('camelizes the keys') { should eq(result) }
     end
