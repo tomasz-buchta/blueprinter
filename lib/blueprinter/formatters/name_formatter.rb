@@ -14,7 +14,12 @@ module Blueprinter
     private
 
     def formatter
-      @camelize_formatter if Blueprinter.configuration.camelize_keys
+      case Blueprinter.configuration.key_transform
+        when :camelize
+          @camelize_formatter
+        else
+          nil
+      end
     end
   end
 end

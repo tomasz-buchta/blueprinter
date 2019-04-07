@@ -1,6 +1,6 @@
 module Blueprinter
   class Configuration
-    attr_accessor :association_default, :datetime_format, :field_default, :generator, :if, :method, :sort_fields_by, :unless, :camelize_keys
+    attr_accessor :association_default, :datetime_format, :field_default, :generator, :if, :method, :sort_fields_by, :unless, :key_transform
 
     VALID_CALLABLES = %i(if unless).freeze
 
@@ -13,7 +13,7 @@ module Blueprinter
       @method = :generate
       @sort_fields_by = :name_asc
       @unless = nil
-      @camelize_keys = false
+      @key_transform = nil
     end
 
     def jsonify(blob)

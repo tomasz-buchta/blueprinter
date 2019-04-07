@@ -23,8 +23,9 @@ shared_examples 'Base::render' do
     end
     it('returns json with the correct values for each data type') { should eq(result) }
 
-    context 'with camelize' do
-      before { Blueprinter.configure { |config| config.camelize_keys = true } }
+    context 'with key_transform = camelize' do
+      let(:key_transform) { :camelize }
+      before { Blueprinter.configure { |config| config.key_transform = key_transform } }
       after { reset_blueprinter_config! }
 
       let(:result) { '{"active":false,"birthday":"1994-03-04","deletedAt":null,"firstName":"Meg","id":' + obj_id + '}' }

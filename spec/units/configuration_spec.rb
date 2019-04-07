@@ -58,9 +58,9 @@ describe 'Blueprinter' do
       expect(Blueprinter.configuration.datetime_format).to eq("%m/%d/%Y")
     end
 
-    it 'should set the `camelize_keys` option' do
-      Blueprinter.configure { |config| config.camelize_keys = true }
-      expect(Blueprinter.configuration.camelize_keys).to eq(true)
+    it 'should set the `key_transform` option' do
+      Blueprinter.configure { |config| config.key_transform = :camelize }
+      expect(Blueprinter.configuration.key_transform).to eq(:camelize)
     end
   end
 
